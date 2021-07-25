@@ -37,7 +37,7 @@ router.post('/',
         if (!errors.isEmpty()) {
             return res.status(400).json({errors: errors.array()});
         }
-        User.findOne({email: req.body.email}) //Illegal erreur ici (find and finOne)
+        User.findOne({email: req.body.email}) //Illegal erreur ici (find and findOne)
             .then(user => {
                 if (!user) {
                console.log(user) //il faut afficher null dans le console
@@ -55,6 +55,7 @@ router.post('/',
                         jwt.sign(payload, process.env.SECRET_KEY, (err, token) => {
                             if (err) throw  err
                             res.send({token})
+                            console.log(token)
                         });
                     }
 

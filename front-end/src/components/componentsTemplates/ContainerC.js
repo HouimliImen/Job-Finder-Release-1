@@ -1,11 +1,7 @@
 import React from 'react'
-import { DropdownButton, Dropdown} from 'react-bootstrap'
 import DeploadCv from './DeploadCv';
 import FeatureJob from './FeatureJob';
-import OurService from "./OurService";
-import TestimonialShareExperince from "./TestimonialShareExperince";
 import SliderArea from "./SliderArea";
-import SupportCompany from "./ SupportCompany";
 import Categorie from "../../pages/Categorie";
 
 const ContainerC = () => {

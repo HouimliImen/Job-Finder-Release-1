@@ -1,15 +1,8 @@
 import React, {useState} from 'react'
-import {Button, Modal} from 'react-bootstrap';
 import '../../css/header.css';
 // import {BrowserRouter as Router,Route,Switch}from 'react-router-dom'
-
-
-import {BrowserRouter as Router, Route, Link, Switch} from "react-router-dom";
-import Login from "../../pages/Login";
+import {Link} from "react-router-dom";
 import Preloader from "./Preloader";
-import Feed from "../../pages/Feed";
-import Register from "../../pages/Register";
-import Home from "../../pages/Home";
 import {useDispatch, useSelector} from "react-redux";
 import {logoutUser} from "../../actions/authActions";
 

@@ -16,6 +16,4 @@ export const getAllcategories=()=>dispatch=>{
             type:GET_CATEGORIE_FAIL,
             payload:err.response.data.errors
         }))
-
-
 }

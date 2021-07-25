@@ -1,9 +1,7 @@
 import React from 'react'
 import {Route} from 'react-router-dom'
 import {useSelector} from "react-redux";
-import Login from "../pages/Login";
 import { Redirect } from 'react-router';
-import UploadCv from "../pages/CreateCV";
 const PrivateRoute = ({component:Component,...rest}) => {
 
            // component : c une props

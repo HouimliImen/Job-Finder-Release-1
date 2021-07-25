@@ -1,12 +1,7 @@
-import DatePicker from 'react-date-picker';
-import jsPDF from 'jspdf';
-import ReactDOMServer from 'react-dom/server';
+//import jsPDF from 'jspdf';
 import './date.css'
 import React, {useEffect, useState} from 'react'
-import {Alert, Button, Form} from 'react-bootstrap';
 import '../css/login.css'
-import {Container, Row} from "reactstrap";
-import {Link} from "react-router-dom";
 import {loginUser} from "../actions/authActions";
 import {useDispatch, useSelector} from "react-redux";
 

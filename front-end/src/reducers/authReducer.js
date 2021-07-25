@@ -45,6 +45,7 @@ export const redirectToHome = history => () => {
 
             }
         case LOGIN_SUCCESS:
+            localStorage.setItem('token',action.payload.token)
             return{
                 ...state,
                 token:action.payload.token,

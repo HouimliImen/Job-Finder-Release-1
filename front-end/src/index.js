@@ -4,7 +4,7 @@ import './index.css';
 import App from './App';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import Login from "./pages/Login";
-import Register from "./pages/Register";
+//import Register from "./pages/Register";
 import {BrowserRouter,Switch,Route} from "react-router-dom";
 import Header from "./components/componentsTemplates/Header";
 import store from "./store/store";
@@ -32,7 +32,7 @@ ReactDOM.render(
                    <Route exact path="/"            component={App} />
                    <Route exact path="/contact"     component={Contact} />
                    <Route exact path="/ranking"     component={Rankings} />
-                   <Route exact path="/register"    component={Register} />
+                   {/**<Route exact path="/register"    component={Register} /> */}
                    <Route exact path="/inscription" component={Inscription} />
                    <Route exact path="/login"       component={Login} />
                     {/** <Route exact path="/profile"     component={Profile} /> */}   

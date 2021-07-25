@@ -7,6 +7,7 @@ import moment from "moment"
 
 const Profile = () => {
     const auth=useSelector(state=>state.auth)
+    console.log('cc',auth.user)
     const dispatch=useDispatch()
     // const Hello=()=>{
     //     console.log("hello ..................")
