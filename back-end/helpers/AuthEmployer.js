@@ -5,14 +5,20 @@ const User = require('../models/User')
 
 
 /*export const authEmployer*/
-module.exports=(req,res,next)=>{
+module.exports=async(req,res,next)=>{
     //let token=req.header('auth-token')
-
-    if(User.connectedAs==='Employer') {
-        next();
+    try{
+        const id=req.userId
+        const user= await User.findById(id)
+        if(user.connectedAs==='Employer')
+         next()
+         else{
+             res.status(401).json({errors:[{msg:"unauthorized action"}]})
+         }
     }
-        else
-        return res.status(403).json({errors: [{msg: "FORBIDDEN ! "}]})
+    catch(err){
+        res.status(500).json({errors:[{msg:"server error"}]})
+    }
 
     }
 

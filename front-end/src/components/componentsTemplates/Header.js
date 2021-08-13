@@ -4,7 +4,7 @@ import '../../css/header.css';
 import {Link} from "react-router-dom";
 import Preloader from "./Preloader";
 import {useDispatch, useSelector} from "react-redux";
-import {logoutUser} from "../../actions/authActions";
+import {loadUser, logoutUser} from "../../actions/authActions";
 
 const Header = () => {
     const dispatch = useDispatch()
@@ -12,7 +12,9 @@ const Header = () => {
     const handleClose = () => setShow(false);
     const handleShow = () => setShow(true);
     const auth = useSelector(state => state.auth)
-
+   /**useEffect(() => {
+       loadUser()
+    }, []) */ 
 
     return (
         <div>
@@ -36,17 +38,16 @@ const Header = () => {
                                     </div>
                                 </div>
                                 {/*   -------------------------------------------- Home  Routes Start --------------------------------------------- */}
-
                                 {/*<Router>*/}
                                 <div className="col-lg-9 col-md-9">
                                     <div className="menu-wrapper">
                                         <div className="main-menu">
                                             <nav className="d-none d-lg-block">
                                                 <ul  style={{marginTop:"50px"}} id="navigation">
-                                                    <Link to="/"><a href="#"  className="btn head-btn1">Offres</a></Link>
-                                                    <Link to="/cv"><a href="#"  className="btn head-btn1">CreateCV</a></Link>
-                                                    <Link to="/ranking">
-                                                        <a href="#"  className="btn head-btn1">Ranking</a></Link>
+                                                   <Link to="/"><a href="#"  className="btn head-btn1">Offres</a></Link> 
+                                                   <Link to="/"><a href="#"  className="btn head-btn1">Mes offres</a></Link> 
+                                                   <Link to="/cv"><a href="#"  className="btn head-btn1">CreateCV</a></Link> 
+                                                   <Link to="/ranking"><a href="#"  className="btn head-btn1">Ranking</a></Link> 
 
                                                     {/*///////////////////// Route condionnel Start (id user connecté ou nn !:) ) ////////////////*/}
                                                     <div className=" d-none f-right d-lg-block">
@@ -103,22 +104,25 @@ const Header = () => {
 
 
                                 {/*// <!-- Avatar -->*/}
+                                 {/*// <!-- Avatar -->*/}
                                 { auth.isAuth &&
+                                
 
-                                    <a
-                                    class="dropdown-toggle d-flex align-items-center hidden-arrow"
-                                    href="#"
-                                    id="navbarDropdownMenuLink"
-                                    role="button"
-                                    data-mdb-toggle="dropdown"
-                                    aria-expanded="false"
-                                    >
-                                       <div><img style={{'marginLeft':'10px','width':'15px'}} src={"/assets/img/logo/online.svg"}/></div>
-                                        <Link to="/profile">
+                                         <Link to="/profile">
+                                             
+                                            <div className="person-radius">
+                                            <img style={{'marginLeft':'10px','width':'15px'}} src={"/assets/img/logo/online.svg"}/>
+                                            <img src={auth.user && auth.user.selectedFile}/>
+                                        </div>
+                                        </Link>
+                                       
+                                    
+                                          
+                                       /** <Link to="/profile">
                                         <img style={{boxShadow: '0 0 98px 6px rgba(0, 0, 0, 0.2)', borderRadius: '50%', width:'30px', height:'40px'
-                                        }} src={auth.user.selectedFile} className="rounded-circle" height="20" alt="" loading="lazy"/>
-                                    </Link>
-                                </a>
+                                        }} src={auth.user && auth.user.selectedFile} className="rounded-circle" height="20" alt="" loading="lazy"/>
+                                    </Link>*/
+                               
                                 }
                             </div>
                             {/*// <!-- Right elements -->*/}

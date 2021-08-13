@@ -34,7 +34,7 @@ const Categorie = () => {
         </div>
        { isLoading ? console.log("Attends svp "): console.log("Get data with success ! ",cat?.description)}
        <div className="row d-flex justify-contnet-center">
-            {  !isLoading && cat && cat.map(el=>
+            {  !isLoading  && cat.map(el=>
                 <div className="col-xl-3 col-lg-3 col-md-4 col-sm-6">
                 <div className="single-services text-center mb-30">
                     {/** <div className="services-ion">

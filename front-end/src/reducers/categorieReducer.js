@@ -2,7 +2,7 @@ import {GET_CATEGORIE_FAIL, GET_CATEGORIE_LOADING, GET_CATEGORIE_SUCCESS} from "
 
 const  initialState={
 
-    categories:null,
+    categories:[],
     isLoading:false
 }
 

@@ -14,19 +14,8 @@ import {
 } from './types'
 import axios from "axios";
 import setTocken from "../setTocken";
-export const registerUser=(info)=>dispatch=>{
-    console.log("Info++++++++++++++++++++",info)
-    axios.post('/register',info)
-        .then(res=>dispatch({
-            type:REGISTER_SUCCESS,
-            payload:res.data
-        }))
-        .catch(err=>dispatch({
-            type:REGISTER_FAIl,
-            payload:err.response.data.errors,
-        }))
-}
-export const registerEmployer=(infoemp)=>dispatch=>{
+
+/*export const registerEmployer=(infoemp)=>dispatch=>{
     axios.post('/registeremployer',infoemp)
         .then(res=>dispatch({
             type:REGISTER_Emp_SUCCESS,
@@ -36,7 +25,7 @@ export const registerEmployer=(infoemp)=>dispatch=>{
             type:REGISTER_Emp_FAIl,
             payload:err.response.data.errors,
         }))
-}
+}*/
 
 ///////LOAD USER:
 export const loadUser=()=>dispatch=>{
@@ -52,7 +41,7 @@ export const loadUser=()=>dispatch=>{
         }))
 }
 //Load employer:
-export const loadEmployer=()=>dispatch=>{
+/*export const loadEmployer=()=>dispatch=>{
     setTocken()
     axios.get('/loginemp')
         .then(res=>dispatch({
@@ -62,9 +51,8 @@ export const loadEmployer=()=>dispatch=>{
         .catch(err=>dispatch({
             type:LOAD_EMPLOYER_FAIL,
             payload:err.response.data.errors
-        }))
-}
-
+        }))}
+*/
 export const loginUser=data=>dispatch=>{
     console.log("data in action ====>",data)
     axios.post('/login',data)
@@ -78,6 +66,20 @@ export const loginUser=data=>dispatch=>{
             type:LOGIN_FAIl,
             payload:err.response.data.errors
         }))
+}
+export const registerUser=(info)=>dispatch=>{
+    console.log("Info++++++++++++++++++++",info)
+    axios.post("/register",info)
+        .then(res=>dispatch({
+            type:REGISTER_SUCCESS,
+            payload:res.data
+        }))
+        .catch(err=>{
+            console.log(err)
+            dispatch({
+            type:REGISTER_FAIl,
+            payload:err.response,
+        })})
 }
 export const logoutUser=()=>dispatch=>{
     dispatch({

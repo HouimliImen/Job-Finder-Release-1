@@ -1,7 +1,7 @@
 import React, {useEffect, useRef, useState} from 'react'
 import {Container, Row} from "reactstrap";
 import {useDispatch, useSelector} from "react-redux";
-import {registerUser, registerEmployer} from "../actions/authActions";
+import {registerUser, registerEmployer, loadUser} from "../actions/authActions";
 import FileBase from 'react-file-base64';
 import moment from 'moment';
 
@@ -30,7 +30,7 @@ const Inscription = ({history}) => {
         companyname: "",
         website: "",
         selectedFile: '',
-        connectedAs:'Employer',
+        connectedAs:'',
         datebirth:'',
     })
     /* state error*/
@@ -40,6 +40,7 @@ const Inscription = ({history}) => {
 
     useEffect(() => {
         if (auth.isAuth) {
+            dispatch(loadUser())
             history.push("/")
         }
         if (auth.errors) {

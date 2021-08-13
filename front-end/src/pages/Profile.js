@@ -55,7 +55,7 @@ const Profile = () => {
                                         <h2 className="name">{auth.user.lastname}</h2>
                                         <h2 className="name">{auth.user.firstname}</h2>
                                         <h2 className="name">{auth.user.email}</h2>
-                                        <h2 className="name">{moment(auth.user.datebirth).format('LL')}</h2>
+                                        <h2 className="name">{moment(auth.user.datebirth).format('LLLL')}</h2>
                                         <div className="numbers">
                                             <div className="post">
                                                 <p>Post</p>
@@ -177,7 +177,7 @@ const Profile = () => {
                                             {/*        </div>*/}
                                             {/*    </div>*/}
                                             {/*</div>*/}
-                                            <div className="featured">
+                                            { auth.user.connectedAs=="Candidate" ?(<div className="featured">
                                                 <div className="featured-header">
                                                     <h2 className="featured-stories"> Latest Feed</h2>
                                                     <div className="icon-two">
@@ -218,7 +218,8 @@ const Profile = () => {
                                                     </div>
                                                 </div>
                                                 {/*<div className="loader"></div>*/}
-                                            </div>
+                                            </div> ) :null}
+                                             {/*Feature end */}
                                         </div>
                                         <div className="last-right">
                                             <img

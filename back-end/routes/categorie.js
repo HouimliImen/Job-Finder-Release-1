@@ -20,6 +20,8 @@ router.post('/',(req,res)=>{
         )
 
 })
+
+
 //**Get All categories***//
 router.get('/all',(req,res)=>{
     Categorie.find()
@@ -30,6 +32,22 @@ router.get('/all',(req,res)=>{
 
         })
 })
+
+/*
+router.get('/all',async (req,res)=>{
+    try{
+        const categories= await Categorie.find()
+     res.send(categories)
+    }
+    catch(err){
+        console.error(err.message)
+        res.status(500).send({errors:[{msg:"Server Error"}]})
+    }
+   //finally{}
+})
+*/
+
+
 //** Get categorie by id ****//
 router.get('/:id',(req,res)=>{
     Categorie.find({_id:req.params.id})

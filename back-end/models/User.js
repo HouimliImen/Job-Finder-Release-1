@@ -1,5 +1,5 @@
 const mongoose=require('mongoose')
-const UserSchema=mongoose.Schema({
+const UserSchema=new mongoose.Schema({
     firstname:String,
     connectedAs:
         {type:String,

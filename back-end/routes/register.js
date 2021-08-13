@@ -1,5 +1,4 @@
 const express = require('express');
-const app = express();
 const User=require('../models/User')
 const router=express.Router()
 const { body, validationResult } = require('express-validator');
@@ -9,7 +8,7 @@ require('dotenv').config()
 
 
 
-app.use(express.json());// for parsing application/json
+
 
 router.post('/', [
     // username must be an email
@@ -19,45 +18,40 @@ router.post('/', [
     body('phone',    "Phone must contain a numeric value ").isNumeric(),
     body('password', "Password must contain at least 6 caracter ").isLength({ min: 5 }),
 ],
-    (req, res) => {
-/////////////////// Test de validation de champs :
-        const errors = validationResult(req);
-        if (!errors.isEmpty()) {
-            return res.status(400).json({ errors: errors.array() });
-        }
-    ////////////////// test email && Creation de new user :
+    async (req, res) => {
+        try{
+            const errors = validationResult(req);
+            if (!errors.isEmpty()) {
+                return res.status(400).json({ errors: errors.array() });
+            }
+            const users= await User.find({email:req.body.email})
+            if (users.length>0){
 
-        User.find({email:req.body.email})
-            .then(users=>
-            {
-
-                if (users.length>0){
-
-                    return res.status(400).json({errors:[{msg:"This email address is already in use !"}]})
-                }
+                return res.status(400).json({errors:[{msg:"This email address is already in use !"}]})
+            }
                 else{
                     let newUser=new User(req.body)
-                    bcrypt.genSalt(10, function(err, salt) {
-                        bcrypt.hash(req.body.password,salt,(err,hashedPwd)=> {
-                            // Store hash in your password DB.
-                            newUser.password=hashedPwd;
-                            newUser.save();
-                            let payload ={
-                                userId:newUser._id
-                            }
-                            /* jwt.sign(payload, process.env.SECRET_KEY,(err,token))
-                                 .then(res.send({token}))
-                                 .catch(res.status(400).send({errors: [{msg: "Error !"}]}))
-             */
-                            jwt.sign(payload,process.env.SECRET_KEY,(err,token)=>{
-                                if (err) throw  err
-                                res.send({token})
-                            });
-                            //console.log(newUser)
-                        });
-                    });
+                    const salt= await bcrypt.genSalt(10)
+                    const hash= await bcrypt.hash(req.body.password,salt)
+                    newUser.password=hash
+                    const savedUser= await newUser.save()
+                    let payload ={
+                        userId:savedUser._id
+                    }
+                    const token = await jwt.sign(payload,process.env.SECRET_KEY)
+                    res.status(200).send({token})
+                   
                 }
-            })
+            }
+        catch(err){
+            console.log(err)
+            res.status(403).json({errors:[{msg:err}]})
+        }
+/////////////////// Test de validation de champs :
+        
+        
+    ////////////////// test email && Creation de new user :
+
 
     });
 

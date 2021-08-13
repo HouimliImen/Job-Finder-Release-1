@@ -12,14 +12,14 @@ function App() {
     useEffect(()=>{
         //dispatch(getcategories())
        // console.log("Cat ===>",categories)
-        if ( auth.connectedAs==="Candidate") {
+        if ( auth.isAuth) {
             dispatch(loadUser())
         }else {
            // dispatch(loadEmployer())
             console.log("null")
         }
 
-    },[]);
+    },[auth.isAuth]);
     return (
       <>
           {/* Fixed Pages*/}

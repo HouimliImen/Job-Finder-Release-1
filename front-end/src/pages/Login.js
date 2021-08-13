@@ -3,7 +3,7 @@ import {Alert, Button, Form} from 'react-bootstrap';
 import '../css/login.css'
 import {Container, Row} from "reactstrap";
 import {Link} from "react-router-dom";
-import {loginUser} from "../actions/authActions";
+import {loadUser, loginUser} from "../actions/authActions";
 import {useDispatch, useSelector} from "react-redux";
 
 const Login = ({history}) => {
@@ -20,6 +20,7 @@ const Login = ({history}) => {
 
     useEffect(()=>{
         if (auth.isAuth){
+            dispatch(loadUser())
            history.push("/")
             console.log(" redirection------------------->")
         }

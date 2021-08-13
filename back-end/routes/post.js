@@ -4,6 +4,7 @@ const authMiddleware = require('../helpers/authMiddlewar')
 const Post=require('../models/Post')
 const Category=require('../models/Category')
 const User=require('../models/User')
+const AuthEmployer = require('../helpers/AuthEmployer')
 const app=express()
 
 
@@ -11,7 +12,7 @@ const app=express()
 app.use(express.json());
 
 //Add new post
-router.post('/',authMiddleware,(req,res)=>{
+router.post('/',authMiddleware,AuthEmployer,(req,res)=>{
     let newPost=new Post({...req.body,owner:req.userId})
     newPost.save()
         .then(post=>res.status(200).send(post))

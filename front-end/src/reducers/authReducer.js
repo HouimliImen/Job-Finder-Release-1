@@ -9,11 +9,10 @@ import {
 
 const  initialState={
     token:localStorage.getItem('token'),
-    user:null,
+    user:JSON.parse(localStorage.getItem('user'))||null,
    // categories:null,
-    isAuth:false,
+    isAuth:Boolean(localStorage.getItem('isAuth'))||false,
     errors:null,
-    connectedAs:'',
    // isLoading:false
     // hasRole:null
 }
@@ -34,18 +33,17 @@ export const redirectToHome = history => () => {
         //     }
 
         case LOAD_USER_SUCCESS:
+            localStorage.setItem('user',JSON.stringify(action.payload))
             return{
                 ...state,
                 user:action.payload,
                 errors: null,
                 isAuth: true,
-                connectedAs:action.payload
-
-               
-
+                connectedAs:""
             }
         case LOGIN_SUCCESS:
             localStorage.setItem('token',action.payload.token)
+            localStorage.setItem('isAuth',true)
             return{
                 ...state,
                 token:action.payload.token,
@@ -93,7 +91,7 @@ export const redirectToHome = history => () => {
                    }
 
         case LOGOUT:
-            localStorage.removeItem('token')
+            localStorage.clear()
             return{
                    isAuth:false,
                    errors:null,
